@@ -1,1 +1,1 @@
-# mybatis_learn2
+# learn mybatis with the <Java Persistence with MyBatis 3(中文版)>
