@@ -29,6 +29,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="findUserByName" parameterType="java.lang.String" resultType="com.zeek.mybatis3.po.User">
 		SELECT * FROM USER WHERE username LIKE '%${value}%'
 	</select>
+	
+	<!-- 添加用户 
+	parameterType：指定输入 参数类型是pojo（包括 用户信息）
+	#{}中指定pojo的属性名，接收到pojo对象的属性值，mybatis通过OGNL获取对象的属性值
+	-->
+	<insert id="insertUser" parameterType="com.zeek.mybatis3.po.User">
+		insert into user(username,birthday,sex,address) value(#{username},#{birthday},#{sex},#{address})
+	</insert>
 
 
 </mapper>
