@@ -20,6 +20,7 @@
 	  <!-- 加载映射文件 -->
 	  <mappers>
 	    <mapper resource="sqlmap/User.xml"/>
+	    <mapper resource="mapper/UserMapper.xml"/>
 	  </mappers>
   	
   	
