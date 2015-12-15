@@ -44,5 +44,27 @@ public class MybatisFirst {
 		sqlSession.close();
 
 	}
+	
+	// 根据用户名称模糊查询用户列表
+	@Test
+	public void findUserByNameTest() throws IOException {
+		// mybatis配置文件
+		String resource = "SqlMapConfig.xml";
+		// 得到配置文件流
+		InputStream inputStream = Resources.getResourceAsStream(resource);
+
+		// 创建会话工厂，传入mybatis的配置文件信息
+		SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder()
+				.build(inputStream);
+
+		// 通过工厂得到SqlSession
+		SqlSession sqlSession = sqlSessionFactory.openSession();
+		// list中的user和映射文件中resultType所指定的类型一致
+		List<User> list = sqlSession.selectList("test.findUserByName", "小明");
+		System.out.println(list);
+		System.out.println(list.size());
+		sqlSession.close();
+
+	}
 
 }
