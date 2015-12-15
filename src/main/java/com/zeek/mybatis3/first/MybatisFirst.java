@@ -99,5 +99,31 @@ public class MybatisFirst {
 		sqlSession.close();
 
 	}
+	
+	// 根据id删除 用户信息
+	@Test
+	public void deleteUserTest() throws IOException {
+		// mybatis配置文件
+		String resource = "SqlMapConfig.xml";
+		// 得到配置文件流
+		InputStream inputStream = Resources.getResourceAsStream(resource);
+
+		// 创建会话工厂，传入mybatis的配置文件信息
+		SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder()
+				.build(inputStream);
+
+		// 通过工厂得到SqlSession
+		SqlSession sqlSession = sqlSessionFactory.openSession();
+
+		// 传入id删除 用户
+		sqlSession.delete("test.deleteUser", 30);
+
+		// 提交事务
+		sqlSession.commit();
+
+		// 关闭会话
+		sqlSession.close();
+
+	}
 
 }

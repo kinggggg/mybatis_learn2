@@ -62,6 +62,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		insert into user(id,username,birthday,sex,address) value(#{id},#{username},#{birthday},#{sex},#{address}) -->
 		
 	</insert>
+	
+	<!-- 删除 用户
+	根据id删除用户，需要输入 id值
+	 -->
+	<delete id="deleteUser" parameterType="java.lang.Integer">
+		delete from user where id=#{id}
+	</delete>
 
 
 </mapper>
