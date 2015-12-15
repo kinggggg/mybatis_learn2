@@ -125,5 +125,39 @@ public class MybatisFirst {
 		sqlSession.close();
 
 	}
+	
+	// 更新用户信息
+	@Test
+	public void updateUserTest() throws IOException {
+		// mybatis配置文件
+		String resource = "SqlMapConfig.xml";
+		// 得到配置文件流
+		InputStream inputStream = Resources.getResourceAsStream(resource);
+
+		// 创建会话工厂，传入mybatis的配置文件信息
+		SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder()
+				.build(inputStream);
+
+		// 通过工厂得到SqlSession
+		SqlSession sqlSession = sqlSessionFactory.openSession();
+		// 更新用户信息
+		
+		User user = new User();
+		//必须设置id
+		user.setId(29);
+		user.setUsername("王大军");
+		user.setBirthday(new Date());
+		user.setSex("2");
+		user.setAddress("河南郑州");
+
+		sqlSession.update("test.updateUser", user);
+		
+		// 提交事务
+		sqlSession.commit();
+
+		// 关闭会话
+		sqlSession.close();
+
+	}
 
 }

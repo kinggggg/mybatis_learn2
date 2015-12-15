@@ -69,6 +69,18 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<delete id="deleteUser" parameterType="java.lang.Integer">
 		delete from user where id=#{id}
 	</delete>
+	
+	<!-- 根据id更新用户
+	分析：
+	需要传入用户的id
+	需要传入用户的更新信息
+	parameterType指定user对象，包括 id和更新信息，注意：id必须存在
+	#{id}：从输入 user对象中获取id属性值
+	 -->
+	<update id="updateUser" parameterType="com.zeek.mybatis3.po.User">
+		update user set username=#{username},birthday=#{birthday},sex=#{sex},address=#{address} 
+		 where id=#{id}
+	</update>
 
 
 </mapper>
