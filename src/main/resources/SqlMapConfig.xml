@@ -26,6 +26,10 @@
 		 -->
 		<!-- <property name="jdbc.driver" value=""/> -->
 	</properties>
+	
+	<!-- 对于settings的配置稍后讲解 -->
+	<!-- <settings>
+	</settings> -->
 
 	<!-- 和spring整合后environments配置将移除 -->
 	<environments default="development">
