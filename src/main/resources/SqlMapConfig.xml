@@ -68,8 +68,14 @@
 		遵循一些规范：需要将mapper接口类名和mapper.xml映射文件名称保持一致，且在一个目录 中
 		上边规范的前提是：使用的是mapper代理方法
 		 -->
-		<mapper class="com.zeek.mybatis3.mapper.UserMapper"/>
+		<!-- <mapper class="com.zeek.mybatis3.mapper.UserMapper"/> -->
 		
+		<!-- 批量加载mapper
+		指定mapper接口的包名，mybatis自动扫描包下边所有mapper接口进行加载
+		遵循一些规范：需要将mapper接口类名和mapper.xml映射文件名称保持一致，且在一个目录 中
+		上边规范的前提是：使用的是mapper代理方法
+		 -->
+		<package name="com.zeek.mybatis3.mapper"/>
 	</mappers>
 
 
