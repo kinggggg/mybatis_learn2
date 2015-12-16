@@ -37,7 +37,11 @@
 		type：类型的路径
 		alias：别名
 		 -->
-		<typeAlias type="com.zeek.mybatis3.po.User" alias="user"/>
+		<!-- <typeAlias type="com.zeek.mybatis3.po.User" alias="user"/> -->
+		<!-- 批量别名定义 
+		指定包名，mybatis自动扫描包中的po类，自动定义别名，别名就是类名（首字母大写或小写都可以）
+		-->
+		<package name="com.zeek.mybatis3.po"/>
 	</typeAliases>
 
 	<!-- 和spring整合后environments配置将移除 -->
