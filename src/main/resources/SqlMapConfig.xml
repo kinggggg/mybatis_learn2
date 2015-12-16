@@ -7,6 +7,23 @@
 	<!-- 加载属性文件 -->
 	<properties resource="db.properties">
 		<!--properties中还可以配置一些属性名和属性值 -->
+		<!-- 
+		注意： MyBatis 将按照下面的顺序来加载属性：
+			在 properties 元素体内定义的属性首先被读取。 
+			然后会读取properties 元素中resource或 url 加载的属性，它会覆盖已读取的同名属性。 
+			最后读取parameterType传递的属性，它会覆盖已读取的同名属性。具体解释如下：
+		场景：比如说此时在classpath路径下存在一个名称为db.properties属性文件，并且在SqlMapConfig.xml中利用Properties元素加载了这个属性文件，其中db.properties文件的内容如下
+		jdbc.driver=com.mysql.jdbc.Driver
+		jdbc.url=jdbc:mysql://localhost:3306/mybatis
+		jdbc.username=root
+		jdbc.password=root
+		在UserMapper.xml中定义了如下的一个查询
+		<select id="findUserByName" parameterType="java.lang.String" resultType="com.zeek.mybatis3.po.User">
+				SELECT * FROM USER WHERE username LIKE '%${jdbc.username}%'
+			</select>
+		注意这个查询中的参数名称为jdbc.username正好与db.perproties中的一个key为jdbc.username的重复
+		若此时通过mapper接口的方式调用这个查询的话，实际上传递给findUserName的参数值就为root
+		 -->
 		<!-- <property name="jdbc.driver" value=""/> -->
 	</properties>
 
