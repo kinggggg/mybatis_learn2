@@ -16,7 +16,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	#{}标识一个占位符
 	#{id}：其中的id表示接受输入的参数，其名称就是id，如果输入参数的类型是简单类型，#{}中的参数名可以任意，可以是value或者其他名称
 	-->
-	<select id="findUserById" parameterType="int" resultType="com.zeek.mybatis3.po.User">
+	<select id="findUserById" parameterType="int" resultType="user">
 		SELECT * FROM USER WHERE ID = #{id}
 	</select>
 	
