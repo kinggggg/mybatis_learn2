@@ -74,6 +74,12 @@ public class UserMapperTest {
 //		userCustom.setSex("1");
 		userCustom.setUsername("小明");
 		userQueryVo.setUserCustom(userCustom);
+		
+		List<Integer> ids = new ArrayList<Integer>();
+		ids.add(1);
+		ids.add(10);
+		ids.add(16);
+		userQueryVo.setIds(ids);
 		//调用userMapper的方法
 		
 		int count = userMapper.findUserCount(userQueryVo);

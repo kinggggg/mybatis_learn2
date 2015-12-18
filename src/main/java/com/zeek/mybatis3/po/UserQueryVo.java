@@ -15,6 +15,16 @@ public class UserQueryVo {
 	
 	//在这里包装所需要的查询条件
 	
+	private List<Integer> ids;
+	
+	public List<Integer> getIds() {
+		return ids;
+	}
+
+	public void setIds(List<Integer> ids) {
+		this.ids = ids;
+	}
+
 	//用户查询条件
 	private UserCustom userCustom;
 
