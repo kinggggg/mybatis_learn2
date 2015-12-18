@@ -13,7 +13,18 @@ public class Orders {
 
     private String note;
     
-    public Integer getId() {
+    //用户信息
+    private User user;
+    
+    public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
+
+	public Integer getId() {
         return id;
     }
 

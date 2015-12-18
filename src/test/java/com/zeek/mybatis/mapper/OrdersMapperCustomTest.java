@@ -11,6 +11,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import com.zeek.mybatis3.mapper.OrdersMapperCustom;
+import com.zeek.mybatis3.po.Orders;
 import com.zeek.mybatis3.po.OrdersCustom;
 
 public class OrdersMapperCustomTest {
@@ -41,6 +42,23 @@ public class OrdersMapperCustomTest {
 
 		// 调用maper的方法
 		List<OrdersCustom> list = ordersMapperCustom.findOrdersUser();
+
+		System.out.println(list);
+		System.out.println(list.size());
+
+		sqlSession.close();
+	}
+	
+	@Test
+	public void testFindOrdersUserResultMap() throws Exception {
+
+		SqlSession sqlSession = sqlSessionFactory.openSession();
+		// 创建代理对象
+		OrdersMapperCustom ordersMapperCustom = sqlSession
+				.getMapper(OrdersMapperCustom.class);
+
+		// 调用maper的方法
+		List<Orders> list = ordersMapperCustom.findOrdersUserResultMap();
 
 		System.out.println(list);
 		System.out.println(list.size());

@@ -6,9 +6,54 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <!-- namespace命名空间，作用就是对sql进行分类化管理，理解sql隔离 注意：使用mapper代理方法开发，namespace有特殊重要的作用，namespace等于mapper接口地址 -->
 <mapper namespace="com.zeek.mybatis3.mapper.OrdersMapperCustom">
 
+	<!-- 订单查询关联用户的resultMap
+	将整个查询的结果映射到com.zeek.mybatis3.po.Orders中
+	 -->
+	<resultMap type="com.zeek.mybatis3.po.Orders" id="ordersUserResultMap">
+		<!-- 配置映射的订单信息 -->
+		<!-- id：指定查询列中的唯 一标识，订单信息的中的唯 一标识，如果有多个列组成唯一标识，配置多个id
+			column：订单信息的唯 一标识 列
+			property：订单信息的唯 一标识 列所映射到Orders中哪个属性
+		  -->
+		<id column="id" property="id"/>
+		<result column="user_id" property="userId"/>
+		<result column="number" property="number"/>
+		<result column="createtime" property="createtime"/>
+		<result column="note" property="note"/>
+		
+		<!-- 配置映射的关联的用户信息 -->
+		<!-- association：用于映射关联查询单个对象的信息
+		property：要将关联查询的用户信息映射到Orders中哪个属性
+		 -->
+		<association property="user"  javaType="com.zeek.mybatis3.po.User">
+			<!-- id：关联查询用户的唯 一标识
+			column：指定唯 一标识用户信息的列
+			javaType：映射到user的哪个属性
+			 -->
+			<id column="user_id" property="id"/>
+			<result column="username" property="username"/>
+			<result column="sex" property="sex"/>
+			<result column="address" property="address"/>
+		</association>
+	</resultMap>
+	
+
 	
 	<!-- 查询订单关联查询用户信息 -->
 	<select id="findOrdersUser" resultType="com.zeek.mybatis3.po.OrdersCustom">
+		SELECT
+		orders.*,
+		USER.username,
+		USER.sex,
+		USER.address
+		FROM
+		orders,
+		USER
+		WHERE orders.user_id = user.id
+	</select>
+	
+	<!-- 查询订单关联查询用户信息，使用resultMap-->
+	<select id="findOrdersUserResultMap" resultMap="ordersUserResultMap">
 		SELECT
 		orders.*,
 		USER.username,
