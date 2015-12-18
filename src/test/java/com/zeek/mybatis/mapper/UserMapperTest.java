@@ -59,6 +59,29 @@ public class UserMapperTest {
 		
 		
 	}
+	
+	@Test
+	public void testFindUserCount() throws Exception {
+		
+		SqlSession sqlSession = sqlSessionFactory.openSession();
+		
+		//创建UserMapper对象，mybatis自动生成mapper代理对象
+		UserMapper userMapper = sqlSession.getMapper(UserMapper.class);
+		
+		//创建包装对象，设置查询条件
+		UserQueryVo userQueryVo = new UserQueryVo();
+		UserCustom userCustom = new UserCustom();
+		userCustom.setSex("1");
+		userCustom.setUsername("小明");
+		userQueryVo.setUserCustom(userCustom);
+		//调用userMapper的方法
+		
+		int count = userMapper.findUserCount(userQueryVo);
+		
+		System.out.println(count);
+		
+		
+	}
 
 	
 	@Test
