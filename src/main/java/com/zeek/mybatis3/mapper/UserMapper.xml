@@ -49,7 +49,17 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	resultType：输出结果类型
 	 -->
 	<select id="findUserCount" parameterType="com.zeek.mybatis3.po.UserQueryVo" resultType="int">
-	   SELECT count(*) FROM USER where user.sex = #{userCustom.sex} AND user.username LIKE '%${userCustom.username}%'
+	   SELECT count(*) FROM USER 
+		<where>
+			<if test="userCustom != null">
+				<if test="userCustom.sex != null and userCustom.sex != ''">
+					AND user.sex = #{userCustom.sex}
+				</if>
+				<if test="userCustom.username != null and userCustom.username != ''">
+					AND user.username LIKE '%${userCustom.username}%'
+				</if>
+			</if>
+		</where>
 	</select>
 	
 

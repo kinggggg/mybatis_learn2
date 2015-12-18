@@ -71,7 +71,7 @@ public class UserMapperTest {
 		//创建包装对象，设置查询条件
 		UserQueryVo userQueryVo = new UserQueryVo();
 		UserCustom userCustom = new UserCustom();
-		userCustom.setSex("1");
+//		userCustom.setSex("1");
 		userCustom.setUsername("小明");
 		userQueryVo.setUserCustom(userCustom);
 		//调用userMapper的方法
