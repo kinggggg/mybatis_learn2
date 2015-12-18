@@ -103,6 +103,26 @@ public class UserMapperTest {
 		
 	}
 	
+	//根据id查询用户信息，使用resultMap输出
+	@Test
+	public void testFindUserByIdResultMap() throws Exception {
+		
+		SqlSession sqlSession = sqlSessionFactory.openSession();
+		
+		//创建UserMapper对象，mybatis自动生成mapper代理对象
+		UserMapper userMapper = sqlSession.getMapper(UserMapper.class);
+		
+		//调用userMapper的方法
+		
+		User user = userMapper.findUserByIdResultMap(1);
+		
+		sqlSession.close();
+		
+		System.out.println(user);
+		
+		
+	}
+	
 	@Test
 	public void testFindUserByName() throws Exception {
 		
