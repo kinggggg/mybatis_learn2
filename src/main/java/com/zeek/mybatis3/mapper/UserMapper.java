@@ -3,12 +3,17 @@ package com.zeek.mybatis3.mapper;
 import java.util.List;
 
 import com.zeek.mybatis3.po.User;
+import com.zeek.mybatis3.po.UserCustom;
+import com.zeek.mybatis3.po.UserQueryVo;
 
 /**
  * 
  * <p>Description: mapper接口，相当 于dao接口，用户管理</p>
  */
 public interface UserMapper {
+	
+	//用户信息综合查询
+	public List<UserCustom> findUserList(UserQueryVo userQueryVo) throws Exception;
 	
 	//根据id查询用户信息
 	public User findUserById(int id) throws Exception;

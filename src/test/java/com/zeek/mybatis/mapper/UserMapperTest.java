@@ -13,6 +13,8 @@ import org.junit.Test;
 
 import com.zeek.mybatis3.mapper.UserMapper;
 import com.zeek.mybatis3.po.User;
+import com.zeek.mybatis3.po.UserCustom;
+import com.zeek.mybatis3.po.UserQueryVo;
 
 public class UserMapperTest {
 
@@ -31,6 +33,31 @@ public class UserMapperTest {
 		// 创建会话工厂，传入mybatis的配置文件信息
 		sqlSessionFactory = new SqlSessionFactoryBuilder()
 				.build(inputStream);
+	}
+	
+	//用户信息的综合 查询
+	@Test
+	public void testFindUserList() throws Exception {
+		
+		SqlSession sqlSession = sqlSessionFactory.openSession();
+		
+		//创建UserMapper对象，mybatis自动生成mapper代理对象
+		UserMapper userMapper = sqlSession.getMapper(UserMapper.class);
+		
+		//创建包装对象，设置查询条件
+		UserQueryVo userQueryVo = new UserQueryVo();
+		UserCustom userCustom = new UserCustom();
+		userCustom.setSex("1");
+		userCustom.setUsername("小明");
+		//传入多个id
+		userQueryVo.setUserCustom(userCustom);
+		//调用userMapper的方法
+		
+		List<UserCustom> list = userMapper.findUserList(userQueryVo);
+		
+		System.out.println(list);
+		
+		
 	}
 
 	
