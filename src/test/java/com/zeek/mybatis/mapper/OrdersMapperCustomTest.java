@@ -11,6 +11,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import com.zeek.mybatis3.mapper.OrdersMapperCustom;
+import com.zeek.mybatis3.mapper.UserMapper;
 import com.zeek.mybatis3.po.Orders;
 import com.zeek.mybatis3.po.OrdersCustom;
 import com.zeek.mybatis3.po.User;
@@ -115,6 +116,32 @@ public class OrdersMapperCustomTest {
 			User user = orders.getUser();
 			System.out.println(user);
 		}
+
+	}
+	
+	// 一级缓存测试
+	@Test
+	public void testCache1() throws Exception {
+		SqlSession sqlSession = sqlSessionFactory.openSession(true);// 开启不自动提交事务的sqlSession
+		UserMapper userMapper = sqlSession.getMapper(UserMapper.class);
+
+		// 下边查询使用一个SqlSession
+		// 第一次发起请求，查询id为1的用户
+		User user1 = userMapper.findUserById(1);
+		System.out.println(user1);
+
+		// 如果sqlSession去执行commit操作（执行插入、更新、删除），清空SqlSession中的一级缓存，这样做的目的为了让缓存中存储的是最新的信息，避免脏读。
+		// 更新user1的信息
+		// user1.setUsername("王五2");
+		// userMapper.updateUser(user1);//此处的更新只是更新了一级缓存中的相应的数据信息
+		// 执行commit操作去清空缓存
+		//sqlSession.commit();
+
+		// 第二次发起请求，查询id为1的用户
+		User user2 = userMapper.findUserById(1);//还是会发送sql到数据库中进行
+		System.out.println(user2);
+
+		sqlSession.close();
 
 	}
 }
