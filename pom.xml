@@ -3,7 +3,7 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.zeek</groupId>
-	<artifactId>mybatis2</artifactId>
+	<artifactId>mybatis_learn2</artifactId>
 	<name>mybatis_learn2</name>
 	<description>learn mybatis 3</description>
 	<packaging>jar</packaging>
