@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.zeek.mybatis3.po.Orders;
 import com.zeek.mybatis3.po.OrdersCustom;
+import com.zeek.mybatis3.po.User;
 
 /**
  * 
@@ -22,5 +23,8 @@ public interface OrdersMapperCustom {
 	
 	//查询订单(关联用户)及订单明细
 	public List<Orders>  findOrdersAndOrderDetailResultMap()throws Exception;
+	
+	//查询用户购买商品信息
+	public List<User>  findUserAndItemsResultMap()throws Exception;
 
 }

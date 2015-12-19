@@ -1,6 +1,7 @@
 package com.zeek.mybatis3.po;
 
 import java.util.Date;
+import java.util.List;
 
 public class User {
 
@@ -10,6 +11,17 @@ public class User {
 	private String sex;
 	private Date birthday;
 	private String address;
+	
+	//用户对应的订单信息
+	private List<Orders> ordersList ;
+
+	public List<Orders> getOrdersList() {
+		return ordersList;
+	}
+
+	public void setOrdersList(List<Orders> ordersList) {
+		this.ordersList = ordersList;
+	}
 
 	public int getId() {
 		return id;

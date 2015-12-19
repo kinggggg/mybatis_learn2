@@ -13,6 +13,7 @@ import org.junit.Test;
 import com.zeek.mybatis3.mapper.OrdersMapperCustom;
 import com.zeek.mybatis3.po.Orders;
 import com.zeek.mybatis3.po.OrdersCustom;
+import com.zeek.mybatis3.po.User;
 
 public class OrdersMapperCustomTest {
 
@@ -77,6 +78,22 @@ public class OrdersMapperCustomTest {
 		// 调用maper的方法
 		List<Orders> list = ordersMapperCustom
 				.findOrdersAndOrderDetailResultMap();
+
+		System.out.println(list);
+
+		sqlSession.close();
+	}
+	
+	@Test
+	public void testFindUserAndItemsResultMap() throws Exception {
+
+		SqlSession sqlSession = sqlSessionFactory.openSession();
+		// 创建代理对象
+		OrdersMapperCustom ordersMapperCustom = sqlSession
+				.getMapper(OrdersMapperCustom.class);
+
+		// 调用maper的方法
+		List<User> list = ordersMapperCustom.findUserAndItemsResultMap();
 
 		System.out.println(list);
 

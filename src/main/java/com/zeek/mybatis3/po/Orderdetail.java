@@ -1,5 +1,6 @@
 package com.zeek.mybatis3.po;
 
+
 public class Orderdetail {
     private Integer id;
 
@@ -9,7 +10,18 @@ public class Orderdetail {
 
     private Integer itemsNum;
     
-    public Integer getId() {
+  //明细对应的商品信息
+    private Items items;
+    
+    public Items getItems() {
+		return items;
+	}
+
+	public void setItems(Items items) {
+		this.items = items;
+	}
+
+	public Integer getId() {
         return id;
     }
 
