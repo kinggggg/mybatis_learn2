@@ -32,6 +32,8 @@
 	 	<!-- 开启延迟加载 -->
         <setting name="lazyLoadingEnabled" value="true"/>
         <setting name="aggressiveLazyLoading" value="false"/>
+        <!-- 开启二级缓存，此值为二级缓存的总开关 -->
+        <setting name="cacheEnabled" value="true"/>
     </settings>
 	
 	<!-- 别名定义 -->

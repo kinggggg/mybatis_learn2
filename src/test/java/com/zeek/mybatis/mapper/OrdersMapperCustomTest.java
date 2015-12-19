@@ -122,7 +122,7 @@ public class OrdersMapperCustomTest {
 	// 一级缓存测试
 	@Test
 	public void testCache1() throws Exception {
-		SqlSession sqlSession = sqlSessionFactory.openSession(true);// 开启不自动提交事务的sqlSession
+		SqlSession sqlSession = sqlSessionFactory.openSession();// 
 		UserMapper userMapper = sqlSession.getMapper(UserMapper.class);
 
 		// 下边查询使用一个SqlSession
@@ -132,16 +132,56 @@ public class OrdersMapperCustomTest {
 
 		// 如果sqlSession去执行commit操作（执行插入、更新、删除），清空SqlSession中的一级缓存，这样做的目的为了让缓存中存储的是最新的信息，避免脏读。
 		// 更新user1的信息
-		// user1.setUsername("王五2");
-		// userMapper.updateUser(user1);//此处的更新只是更新了一级缓存中的相应的数据信息
+		 user1.setUsername("王五3");
+		 userMapper.updateUser(user1);//此处的更新只是更新了一级缓存中的相应的数据信息
 		// 执行commit操作去清空缓存
-		//sqlSession.commit();
+		sqlSession.commit();
 
 		// 第二次发起请求，查询id为1的用户
-		User user2 = userMapper.findUserById(1);//还是会发送sql到数据库中进行
+		User user2 = userMapper.findUserById(1);//由于sqlSession调用的是commit操作而不是close方法（若是调用close方法话，会将数据放置到二级缓存当中）
+												//还是会发送sql到数据库中进行
 		System.out.println(user2);
 
 		sqlSession.close();
+
+	}
+	
+	// 二级缓存测试
+	@Test
+	public void testCache2() throws Exception {
+		SqlSession sqlSession1 = sqlSessionFactory.openSession();
+		SqlSession sqlSession2 = sqlSessionFactory.openSession();
+		SqlSession sqlSession3 = sqlSessionFactory.openSession();
+		// 创建代理对象
+		UserMapper userMapper1 = sqlSession1.getMapper(UserMapper.class);
+		// 第一次发起请求，查询id为1的用户
+		User user1 = userMapper1.findUserById(1);
+		System.out.println(user1);//username值为 【张明明2】
+		
+		//这里执行关闭操作，将sqlsession中的数据写到二级缓存区域
+		sqlSession1.close();
+		
+		
+			//使用sqlSession3执行commit()操作
+			UserMapper userMapper3 = sqlSession3.getMapper(UserMapper.class);
+			User user  = userMapper3.findUserById(1);
+			user.setUsername("张明明3");
+			userMapper3.updateUser(user);
+			//执行提交，清空UserMapper下边的二级缓存
+			sqlSession3.commit();//此处提交的事务，数据库中的值为 【张明明3】
+			sqlSession3.close();
+		
+		
+
+		UserMapper userMapper2 = sqlSession2.getMapper(UserMapper.class);
+		// 第二次发起请求，查询id为1的用户
+		User user2 = userMapper2.findUserById(1);//由于在UserMapper.xml中 id为updateUser的statement设置了flushCache="false"，即
+												 //<update id="updateUser" parameterType="com.zeek.mybatis3.po.User" flushCache="false">(在配置文件中没有设置此属性，若需要测试的话，需要再加上)
+												 //更新用户信息时，不更新相应的二级缓存的信息，此时二级缓存中的信息还为【张明明2】，因此此时userMapper2查询出的id为1的用户的信息的名称
+												 //的值还是为 【张明明2】，出现脏数据
+		System.out.println(user2);
+
+		sqlSession2.close();
 
 	}
 }
