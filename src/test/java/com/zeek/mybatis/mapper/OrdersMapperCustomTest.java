@@ -65,5 +65,22 @@ public class OrdersMapperCustomTest {
 
 		sqlSession.close();
 	}
+	
+	@Test
+	public void testFindOrdersAndOrderDetailResultMap() throws Exception {
+
+		SqlSession sqlSession = sqlSessionFactory.openSession();
+		// 创建代理对象
+		OrdersMapperCustom ordersMapperCustom = sqlSession
+				.getMapper(OrdersMapperCustom.class);
+
+		// 调用maper的方法
+		List<Orders> list = ordersMapperCustom
+				.findOrdersAndOrderDetailResultMap();
+
+		System.out.println(list);
+
+		sqlSession.close();
+	}
 
 }

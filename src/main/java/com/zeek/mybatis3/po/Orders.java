@@ -1,6 +1,7 @@
 package com.zeek.mybatis3.po;
 
 import java.util.Date;
+import java.util.List;
 
 public class Orders {
     private Integer id;
@@ -16,7 +17,18 @@ public class Orders {
     //用户信息
     private User user;
     
-    public User getUser() {
+    //订单明细信息
+    private List<Orderdetail> orderdetails;
+    
+    public List<Orderdetail> getOrderdetails() {
+		return orderdetails;
+	}
+
+	public void setOrderdetails(List<Orderdetail> orderdetails) {
+		this.orderdetails = orderdetails;
+	}
+
+	public User getUser() {
 		return user;
 	}
 
