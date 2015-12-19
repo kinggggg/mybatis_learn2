@@ -100,4 +100,21 @@ public class OrdersMapperCustomTest {
 		sqlSession.close();
 	}
 
+	// 查询订单关联查询用户，用户信息使用延迟加载
+	@Test
+	public void testFindOrdersUserLazyLoading() throws Exception {
+		SqlSession sqlSession = sqlSessionFactory.openSession();// 创建代理对象
+		OrdersMapperCustom ordersMapperCustom = sqlSession
+				.getMapper(OrdersMapperCustom.class);
+		// 查询订单信息（单表）
+		List<Orders> list = ordersMapperCustom.findOrdersUserLazyLoading();
+
+		// 遍历上边的订单列表
+		for (Orders orders : list) {
+			// 执行getUser()去查询用户信息，这里实现按需加载
+			User user = orders.getUser();
+			System.out.println(user);
+		}
+
+	}
 }
