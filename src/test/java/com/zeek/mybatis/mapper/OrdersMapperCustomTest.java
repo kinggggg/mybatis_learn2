@@ -162,14 +162,14 @@ public class OrdersMapperCustomTest {
 		sqlSession1.close();
 		
 		
-			//使用sqlSession3执行commit()操作
-			UserMapper userMapper3 = sqlSession3.getMapper(UserMapper.class);
-			User user  = userMapper3.findUserById(1);
-			user.setUsername("张明明3");
-			userMapper3.updateUser(user);
-			//执行提交，清空UserMapper下边的二级缓存
-			sqlSession3.commit();//此处提交的事务，数据库中的值为 【张明明3】
-			sqlSession3.close();
+		/*//使用sqlSession3执行commit()操作
+		UserMapper userMapper3 = sqlSession3.getMapper(UserMapper.class);
+		User user  = userMapper3.findUserById(1);
+		user.setUsername("张明明3");
+		userMapper3.updateUser(user);
+		//执行提交，清空UserMapper下边的二级缓存
+		sqlSession3.commit();//此处提交的事务，数据库中的值为 【张明明3】
+		sqlSession3.close();*/
 		
 		
 
