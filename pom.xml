@@ -47,12 +47,14 @@
 			<scope>runtime</scope>
 		</dependency>
 		
+		<!-- mybatis mapper接口代理方式需要这个依赖 -->
 		<dependency>
 			<groupId>cglib</groupId>
 			<artifactId>cglib</artifactId>
 			<version>${cglib.version}</version>
 		</dependency>
 		
+		<!-- mybatis集成ehcache -->
 		<dependency>
 			<groupId>org.mybatis</groupId>
 			<artifactId>mybatis-ehcache</artifactId>
