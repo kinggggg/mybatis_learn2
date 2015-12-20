@@ -1,2 +1,2 @@
 # mybatis_learn2
-根据itcast yq视频学习mybatis
+learn mybatis3 with itcast yq's video
