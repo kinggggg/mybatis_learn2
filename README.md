@@ -1,1 +1,2 @@
-# learn mybatis with the <Java Persistence with MyBatis 3(中文版)>
+# mybatis_learn2
+根据itcast yq视频学习mybatis
